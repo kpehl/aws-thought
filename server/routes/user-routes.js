@@ -1,5 +1,7 @@
+// Import express and router
 const express = require('express');
 const router = express.Router();
+// Configure service interface object
 const AWS = require("aws-sdk");
 const awsConfig = {
   region: "us-east-2",
@@ -12,9 +14,11 @@ const table = "Thoughts";
 
 // get all users' thoughts
 router.get('/users', (req, res) => {
+  // assign "Thoughts" to the TableName property for the scan
   const params = {
     TableName: table
   };
+  // scan the table in the parameters object and return all items
   dynamodb.scan(params, (err, data) => {
     if (err) {
       res.status(500).json(err); // an error occurred
@@ -28,19 +32,26 @@ router.get('/users', (req, res) => {
 router.get('/users/:username', (req, res) => {
   console.log(`Querying for thought(s) from ${req.params.username}.`);
   const params = {
+    // assign "Thoughts" as the table in question
     TableName: table,
+    // username is the condition for the query since we're looking for one user
     KeyConditionExpression: "#un = :user",
+    // assign aliases 
     ExpressionAttributeNames: {
       "#un": "username",
       "#ca": "createdAt",
       "#th": "thought"
     },
+    // define the user as the one provided in the API request
     ExpressionAttributeValues: {
       ":user": req.params.username
     },
-    ProjectionExpression: "#th, #ca"
+    // define that the thought and createdAt data should be returned
+    ProjectionExpression: "#th, #ca",
+    // default is true, which sorts ascending by the sort key attribute as defined in the table; we want descending, i.e. newest thought first
+    ScanIndexForward: false
   };
-
+  // query the table using the parameters as defined above and return the data
   dynamodb.query(params, (err, data) => {
     if (err) {
       console.error("Unable to query. Error:", JSON.stringify(err, null, 2));

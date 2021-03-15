@@ -32,3 +32,5 @@ dynamodb.createTable(params, (err, data) => {
         console.log("Created table. Table description JSON:", JSON.stringify(data, null, 2));
     }
 });
+
+// verify table creation with AWS CLI using the command: aws dynamodb list-tables --endpoint-url http://localhost:8000

@@ -27,3 +27,5 @@ allUsers.forEach(user => {
     }
   });
 });
+
+// verify table contents with the AWS CLI command: aws dynamodb scan --table-name Thoughts --endpoint-url http://localhost:8000
