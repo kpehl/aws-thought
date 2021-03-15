@@ -63,7 +63,7 @@ router.get('/users/:username', (req, res) => {
   });
 });
 
-// Create new user
+// Create new user thought
 router.post('/users', (req, res) => {
   const params = {
     TableName: table,
