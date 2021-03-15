@@ -3,7 +3,7 @@ const fs = require('fs');
 
 AWS.config.update({
   region: "us-east-2",
-  endpoint: "http://localhost:8000"
+  // endpoint: "http://localhost:8000"   // used for local instance; commented out for using S3 web service
 });
 const dynamodb = new AWS.DynamoDB.DocumentClient({apiVersion: '2012-08-10'});
 

@@ -23,16 +23,20 @@ const Profile = props => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const res = await fetch(`/api/users/${userParam}`);
-      const data = await res.json();
-      // sort the array by createdAt property ordered by descending values
-      // const orderData = data.sort((a, b) => (a.createdAt < b.createdAt) ? 1 : -1);
-      console.log(data);
-      setThoughts(data);
-      setIsLoaded(true);
-    }
+      try {
+        const res = await fetch(`/api/users/${userParam}`);
+        const data = await res.json();
+        data.map(item => item.username = userParam)
+        console.log(data);
+        setThoughts([...data]);
+        // console.log(thoughts)
+        setIsLoaded(true);
+      } catch (error) {
+        console.log(error);
+      }
+    };
     fetchData();
-  }, []);
+  }, [userParam]);
 
   return (
     <div>

@@ -12,7 +12,7 @@ const ThoughtForm = () => {
     }
   };
 
-  // submit form
+  // submit form handler
   const handleFormSubmit = event => {
     event.preventDefault();
     // POST method with formState
@@ -29,8 +29,9 @@ const ThoughtForm = () => {
       console.log(data);
     }
     postData();
-    // clear form value
+    // clear form values after form data is posted
     setFormState({ username: '', thought: '' });
+    // reset character count to 0
     setCharacterCount(0);
   };
 

@@ -5,7 +5,7 @@ const router = express.Router();
 const AWS = require("aws-sdk");
 const awsConfig = {
   region: "us-east-2",
-  endpoint: "http://localhost:8000",
+  // endpoint: "http://localhost:8000",   // used for local instance; commented out for using S3 web service
 
 };
 AWS.config.update(awsConfig);
