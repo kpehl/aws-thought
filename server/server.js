@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const PORT = process.env.PORT || 3001;
-const fileRoutes = require('./routes/file-upload');
+const imageRoutes = require('./routes/image-upload');
 const userRoutes = require('./routes/user-routes');
 
 // express middleware, used to be bodyparser
@@ -14,8 +14,8 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // app.use(require('./routes'));
-app.use('/api/', fileRoutes);
 app.use('/api/', userRoutes);
+app.use('/api/', imageRoutes);
 
 // Start the API server
 app.listen(PORT, () =>
