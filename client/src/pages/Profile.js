@@ -26,8 +26,8 @@ const Profile = props => {
       try {
         const res = await fetch(`/api/users/${userParam}`);
         const data = await res.json();
-        data.map(item => item.username = userParam)
-        console.log(data);
+        // data.map(item => item.username = userParam)
+        // console.log(data);
         setThoughts([...data]);
         // console.log(thoughts)
         setIsLoaded(true);
@@ -36,7 +36,7 @@ const Profile = props => {
       }
     };
     fetchData();
-  }, [userParam, setThoughts]);
+  }, [userParam]);
 
   return (
     <div>

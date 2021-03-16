@@ -40,14 +40,15 @@ router.get('/users/:username', (req, res) => {
     ExpressionAttributeNames: {
       "#un": "username",
       "#ca": "createdAt",
-      "#th": "thought"
+      "#th": "thought",
+      '#img': "image"
     },
     // define the user as the one provided in the API request
     ExpressionAttributeValues: {
       ":user": req.params.username
     },
     // define that the thought and createdAt data should be returned
-    ProjectionExpression: "#th, #ca",
+    ProjectionExpression: "#un, #th, #ca, #img",
     // default is true, which sorts ascending by the sort key attribute as defined in the table; we want descending, i.e. newest thought first
     ScanIndexForward: false
   };
@@ -70,7 +71,8 @@ router.post('/users', (req, res) => {
     Item: {
       "username": req.body.username,
       "createdAt": Date.now(),
-      "thought": req.body.thought
+      "thought": req.body.thought,
+      "image": req.body.image
     }
   };
   dynamodb.put(params, (err, data) => {
