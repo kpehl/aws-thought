@@ -153,6 +153,11 @@ nav a:hover {
   font-size: 1.4rem;
 }
 
+/* IMAGES */
+img {
+  max-width: 95%;
+}
+
 /* FORM */
 .form-label,
 .form-input,

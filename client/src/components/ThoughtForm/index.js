@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 
 const ThoughtForm = () => {
-  const [formState, setFormState] = useState({ username: '', thought: '' });
+  const [formState, setFormState] = useState({ username: '', thought: '', image: '' });
   const [characterCount, setCharacterCount] = useState(0);
   const fileInput = useRef(null);
 
@@ -31,7 +31,7 @@ const ThoughtForm = () => {
     }
     postData();
     // clear form values after form data is posted
-    setFormState({ username: '', thought: '' });
+    setFormState({ username: '', thought: '', image: '' });
     // reset character count to 0
     setCharacterCount(0);
   };
@@ -52,7 +52,6 @@ const ThoughtForm = () => {
         if (!res.ok) throw new Error(res.statusText);
         const postResponse = await res.json();
         setFormState({...formState, image: postResponse.Location})
-        
         return postResponse.Location;
       } catch (error) {
         console.log(error);
@@ -91,6 +90,7 @@ const ThoughtForm = () => {
             type="file"
             ref={fileInput}
             className="form-input p-2"
+            name="image"
           />
           <button 
             className="btn" 
